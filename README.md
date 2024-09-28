@@ -21,6 +21,14 @@ Clicking on an article will take you to a dedicated page showing the article tex
 ![Article Page](./figures/article1.png)
 ![Article Recommendations](./figures/article2.png)
 
+## Data
+Download the following data in `~/data` directory:
+
+```bash
+wget https://s3-us-west-1.amazonaws.com/msan692/glove.6B.300d.txt.zip
+wget https://s3-us-west-1.amazonaws.com/msan692/bbc.zip
+```
+
 ## Part 1: Database of Recommendations
 
 ### Components
