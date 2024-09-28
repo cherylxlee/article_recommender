@@ -14,12 +14,12 @@ The goal of this project is to develop an article recommendation engine utilizin
 
 The application will feature a web server displaying a list of articles from the [BBC](http://mlg.ucd.ie/datasets/bbc.html) dataset, accessible at `http://127.0.0.1:5000`.
 
-![Articles List](../figures/articles.png)
+![Articles List](./figures/articles.png)
 
 Clicking on an article will take you to a dedicated page showing the article text and a list of five recommended articles.
 
-![Article Page](../figures/article1.png)
-![Article Recommendations](../figures/article2.png)
+![Article Page](./figures/article1.png)
+![Article Recommendations](./figures/article2.png)
 
 ## Part 1: Database of Recommendations
 
