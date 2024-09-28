@@ -1,10 +1,29 @@
 # Article Recommendation System
 
+![Python](https://img.shields.io/badge/Python-blue)
+![Flask](https://img.shields.io/badge/Flask-orange)
+![NumPy](https://img.shields.io/badge/NumPy-red)
+![pandas](https://img.shields.io/badge/pandas-green)
+![lxml](https://img.shields.io/badge/lxml-lightgrey)
+
 This project implements an article recommendation system using word vectors and a web application to display the results.
+
+## Goal
+
+The goal of this project is to develop an article recommendation engine utilizing word vectors through the [word2vec](http://arxiv.org/pdf/1301.3781.pdf) technique. It leverages a "database" of word vectors from [Stanford's GloVe project](https://nlp.stanford.edu/projects/glove/) trained on a Wikipedia dump. The project involves reading a database of word vectors and a corpus of text articles, then organizing them into a structured format for efficient processing.
+
+The application will feature a web server displaying a list of articles from the [BBC](http://mlg.ucd.ie/datasets/bbc.html) dataset, accessible at `http://127.0.0.1:5000`.
+
+![Articles List](../figures/articles.png)
+
+Clicking on an article will take you to a dedicated page showing the article text and a list of five recommended articles.
+
+![Article Page](../figures/article1.png)
+![Article Recommendations](../figures/article2.png)
 
 ## Part 1: Database of Recommendations
 
-### Deliverables for Part 1
+### Components
 
 1. `doc2vec.py`: Complete the implementation of the functions defined in this file.
 
@@ -24,7 +43,7 @@ Should generate `articles.pkl` and `recommended.pkl`, which will be utilized in 
 
 ## Part 2: Web Application Development
 
-### Deliverables for Part 2
+### Components
 
 1. `server.py`: Implement Flask routes to handle HTTP requests.
 2. `templates/articles.html`: Use template language to generate HTML for the main articles list page.
