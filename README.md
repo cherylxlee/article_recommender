@@ -33,16 +33,6 @@ wget https://s3-us-west-1.amazonaws.com/msan692/bbc.zip
 
 ### Components
 
-1. `doc2vec.py`: Complete the implementation of the functions defined in this file.
-
-To validate this section, run the following test:
-
-```bash
-pytest -v test_doc2vec.py
-```
-
-Executing
-
 ```bash
 python doc2vec.py ~/data/glove.6B.300d.txt ~/data/bbc
 ```
@@ -53,17 +43,9 @@ Should generate `articles.pkl` and `recommended.pkl`, which will be utilized in 
 
 ### Components
 
-1. `server.py`: Implement Flask routes to handle HTTP requests.
-2. `templates/articles.html`: Use template language to generate HTML for the main articles list page.
-3. `templates/article.html`: Use template language to generate HTML for individual article pages.
-
-To validate this part, run:
-
-```bash
-pytest test_server.py
-```
-
-Ensure your application is running locally to execute the tests.
+1. `server.py`: Implements Flask routes to handle HTTP requests.
+2. `templates/articles.html`: Uses template language to generate HTML for the main articles list page.
+3. `templates/article.html`: Uses template language to generate HTML for individual article pages.
 
 ## Discussion
 
@@ -73,19 +55,13 @@ Each word is represented by a 300-dimensional vector capturing its meaning, deri
 
 ### Efficiently Loading the GloVe File
 
-To optimize memory usage, read the GloVe file line by line, building a dictionary incrementally:
-
-```python
-d = {}
-for line in f:
-    # Process line to build the dictionary
-```
+To optimize memory usage, reads the GloVe file line by line, building a dictionary incrementally:
 
 ### Web Server Implementation
 
 The Flask server should handle two primary URLs: a list of articles at `/` and individual articles at `/article/topic/filename`. The BBC corpus is organized into topic directories containing text files.
 
-When testing, access the articles list via:
+Access the articles list via:
 
 ```
 http://127.0.0.1:5000/
@@ -97,21 +73,21 @@ And a specific article at:
 http://127.0.0.1:5000/article/business/030.txt
 ```
 
-The `server.py` file will contain Flask route definitions that you need to complete:
+The `server.py` file contains Flask route definitions:
 
 ```python
 @app.route("/")
 def articles():
-    """Show a list of article titles"""
+    """Shows a list of article titles"""
 ```
 
 ```python
 @app.route("/article/<topic>/<filename>")
 def article(topic, filename):
-    """Show an article with the given filename."""
+    """Shows an article with the given filename."""
 ```
 
-Utilize the Jinja2 template engine for rendering HTML templates.
+Utilizes the Jinja2 template engine for rendering HTML templates.
 
 ## Dependencies
 
