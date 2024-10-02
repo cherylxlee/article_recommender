@@ -55,7 +55,15 @@ Each word is represented by a 300-dimensional vector capturing its meaning, deri
 
 ### Efficiently Loading the GloVe File
 
-To optimize memory usage, reads the GloVe file line by line, building a dictionary incrementally:
+To optimize memory usage, we read the GloVe file line by line, building a dictionary incrementally:
+
+```
+        for line in f:
+            parts = line.split()
+            word = parts[0]
+            if word not in ENGLISH_STOP_WORDS:
+                glove_dict[word] = np.array(parts[1:], dtype=float)
+```
 
 ### Web Server Implementation
 
@@ -87,7 +95,7 @@ def article(topic, filename):
     """Shows an article with the given filename."""
 ```
 
-Utilizes the Jinja2 template engine for rendering HTML templates.
+It also utilizes the Jinja2 template engine for rendering HTML templates.
 
 ## Dependencies
 
