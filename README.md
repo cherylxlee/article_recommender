@@ -5,6 +5,7 @@
 ![NumPy](https://img.shields.io/badge/NumPy-red)
 ![pandas](https://img.shields.io/badge/pandas-green)
 ![lxml](https://img.shields.io/badge/lxml-lightgrey)
+![lxml](https://img.shields.io/badge/spacy-lightblue)
 
 This project implements an article recommendation system using word vectors and a web application to display the results.
 
@@ -113,4 +114,5 @@ pip install Flask
 pip install numpy
 pip install pandas
 pip install lxml
+pip install spacy
 ```
