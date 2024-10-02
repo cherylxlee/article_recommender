@@ -37,7 +37,7 @@ wget https://s3-us-west-1.amazonaws.com/msan692/bbc.zip
 python doc2vec.py ~/data/glove.6B.300d.txt ~/data/bbc
 ```
 
-Should generate `articles.pkl` and `recommended.pkl`, which will be utilized in Part 2.
+Should generate `articles.pkl` and `recommended.pkl`.
 
 ## Part 2: Web Application Development
 
