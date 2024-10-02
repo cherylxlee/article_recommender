@@ -63,7 +63,6 @@ To optimize memory usage, we read the GloVe file line by line, building a dictio
             word = parts[0]
             if word not in ENGLISH_STOP_WORDS:
                 glove_dict[word] = np.array(parts[1:], dtype=float)
-
 ```
 
 ### Web Server Implementation
