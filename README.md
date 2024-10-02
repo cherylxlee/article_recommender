@@ -99,12 +99,10 @@ The `server.py` file contains Flask route definitions:
 
 ```python
 @app.route("/")
-def articles():
 ```
 
 ```python
 @app.route("/article/<topic>/<filename>")
-def article(topic, filename):
 ```
 
 It also utilizes the Jinja2 template engine for rendering HTML templates.
