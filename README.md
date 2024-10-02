@@ -24,16 +24,13 @@ Clicking on an article will take you to a dedicated page showing the article tex
 ## Future Improvements for the Flask App
 
 ### 1. Enhanced User Interface
-- **Responsive Design**: Use a CSS framework like Bootstrap to make the app visually appealing and responsive. This can significantly improve the user experience across different devices with minimal effort.
+- **Responsive Design**: Use Bootstrap to make the app visually appealing and responsive, to improve user experience.
 
 ### 2. Improved Article Recommendations
-- **Personalized Recommendations**: Start by implementing a simple user feedback mechanism, such as thumbs up/down or favorite buttons for articles. This data can be used to tailor recommendations based on what users prefer.
+- **Personalized Recommendations**: Implement a simple user feedback mechanism, thumbs up/down and favorite buttons for articles.
 
 ### 3. Advanced Search Functionality
-- **Search Bar**: Add a basic search bar to allow users to search for articles by keywords. This feature can be implemented using simple form handling in Flask and will enhance user accessibility to content.
-
-### 4. Error Handling and User Feedback
-- **Basic Error Handling**: Implement error handling for common issues, like displaying user-friendly error messages when an article is not found or when there are server issues. This can improve the overall user experience.
+- **Search Bar**: Add a search bar to allow users to search for articles by keywords.
 
 ## Data
 Download the following data in `~/data` directory:
