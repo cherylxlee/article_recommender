@@ -21,6 +21,20 @@ Clicking on an article will take you to a dedicated page showing the article tex
 ![Article Page](./figures/article1.png)
 ![Article Recommendations](./figures/article2.png)
 
+## Future Improvements for the Flask App
+
+### 1. Enhanced User Interface
+- **Responsive Design**: Use a CSS framework like Bootstrap to make the app visually appealing and responsive. This can significantly improve the user experience across different devices with minimal effort.
+
+### 2. Improved Article Recommendations
+- **Personalized Recommendations**: Start by implementing a simple user feedback mechanism, such as thumbs up/down or favorite buttons for articles. This data can be used to tailor recommendations based on what users prefer.
+
+### 3. Advanced Search Functionality
+- **Search Bar**: Add a basic search bar to allow users to search for articles by keywords. This feature can be implemented using simple form handling in Flask and will enhance user accessibility to content.
+
+### 4. Error Handling and User Feedback
+- **Basic Error Handling**: Implement error handling for common issues, like displaying user-friendly error messages when an article is not found or when there are server issues. This can improve the overall user experience.
+
 ## Data
 Download the following data in `~/data` directory:
 
@@ -69,7 +83,7 @@ To optimize memory usage, we read the GloVe file line by line, building a dictio
 
 The Flask server should handle two primary URLs: a list of articles at `/` and individual articles at `/article/topic/filename`. The BBC corpus is organized into topic directories containing text files.
 
-Access the articles list via:
+Access the articles list via `IP.txt`:
 
 ```
 http://127.0.0.1:5000/
@@ -86,13 +100,11 @@ The `server.py` file contains Flask route definitions:
 ```python
 @app.route("/")
 def articles():
-    """Shows a list of article titles"""
 ```
 
 ```python
 @app.route("/article/<topic>/<filename>")
 def article(topic, filename):
-    """Shows an article with the given filename."""
 ```
 
 It also utilizes the Jinja2 template engine for rendering HTML templates.
