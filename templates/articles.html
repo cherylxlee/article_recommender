@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Articles</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif; /* Set Verdana font for the entire body */
+        }
+        a:link {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<style type="text/css">
-a:link {
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-</style>
 <body>
 
-<h1 style="">Articles</h1>
-
-ARTICLE TITLES/LINKS
-
+<h1>Articles</h1>
+{% for topic, articles in grouped_articles.items() %}
+    <h2>{{ topic.title() }}</h2> 
+    {% for article in articles %}
+        <p>
+            <a href="{{ url_for('article', topic=topic, filename=article.filename) }}">
+                {{ article.title }}
+            </a>
+        </p>
+    {% endfor %}
+{% endfor %}
 </body>
 </html>
