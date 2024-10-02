@@ -11,15 +11,34 @@ This project implements an article recommendation system using word vectors and 
 
 ## Goal
 
-The goal of this project is to develop an article recommendation engine utilizing word vectors through the [word2vec](http://arxiv.org/pdf/1301.3781.pdf) technique. It leverages a "database" of word vectors from [Stanford's GloVe project](https://nlp.stanford.edu/projects/glove/) trained on a Wikipedia dump. The project involves reading a database of word vectors and a corpus of text articles, then organizing them into a structured format for efficient processing.
+Developed an article recommendation engine utilizing word vectors through the [word2vec](http://arxiv.org/pdf/1301.3781.pdf) technique. It leverages a "database" of word vectors (embeddings) from [Stanford's GloVe project](https://nlp.stanford.edu/projects/glove/) trained on a Wikipedia dump. The project involves reading a database of word vectors and a corpus of text articles from the BBC, then organizing them into a structured format for efficient processing.
 
-The application will feature a web server displaying a list of articles from the [BBC](http://mlg.ucd.ie/datasets/bbc.html) dataset, accessible at `http://127.0.0.1:5000`.
+The application features a web server displaying a list of articles from the [BBC](http://mlg.ucd.ie/datasets/bbc.html) dataset, accessible at `http://127.0.0.1:5000`.
+
+Run `server.py` to run the `Flask` app locally.
+
+```bash
+python server.py
+```
+
+Access the homepage at the URL provided in `IP.txt`:
+
+```
+http://127.0.0.1:5000/
+```
 
 <img src="./figures/articles.png" alt="Articles List" width="400" />
 
 Clicking on an article will take you to a dedicated page showing the article text and a list of five recommended articles.
 
 <img src="./figures/article1.png" alt="Articles List" width="700" />
+
+You can also search for a specific article by specifying in the URL:
+
+```
+http://127.0.0.1:5000/article/tech/076.txt
+```
+
 <img src="./figures/article2.png" alt="Articles List" width="700" />
 
 ## Future Improvements for the Flask App
@@ -33,7 +52,7 @@ Clicking on an article will take you to a dedicated page showing the article tex
 ### 3. Advanced Search Functionality
 - **Search Bar**: Add a search bar to allow users to search for articles by keywords.
 
-## Data
+## Setup
 Download the following data in `~/data` directory:
 
 ```bash
@@ -45,11 +64,31 @@ wget https://s3-us-west-1.amazonaws.com/msan692/bbc.zip
 
 ### Components
 
+Run `doc2vec.py` scripts to get the pickle files.
+
 ```bash
 python doc2vec.py ~/data/glove.6B.300d.txt ~/data/bbc
 ```
 
-Should generate `articles.pkl` and `recommended.pkl`.
+Should generate `articles.pkl` and `recommended.pkl` which are used for processing:
+* `articles.pkl`: Contains a list of articles, where each article is represented as a list with key information:
+
+  ```python
+  [[topic, filename, title, text], ...]
+  ```
+* `recommended.pkl`: Stores a dictionary where each key is a tuple of (topic, filename), and each value is a list of recommended articles:
+  ```python
+  {
+    (topic, filename): [
+        [topic, filename, title],
+        [topic, filename, title],
+        [topic, filename, title],
+        [topic, filename, title],
+        [topic, filename, title],
+    ],
+  ...
+  )
+  ```
 
 ## Part 2: Web Application Development
 
@@ -67,31 +106,11 @@ Each word is represented by a 300-dimensional vector capturing its meaning, deri
 
 ### Efficiently Loading the GloVe File
 
-To optimize memory usage, we read the GloVe file line by line, building a dictionary incrementally:
-
-```
-        for line in f:
-            parts = line.split()
-            word = parts[0]
-            if word not in ENGLISH_STOP_WORDS:
-                glove_dict[word] = np.array(parts[1:], dtype=float)
-```
+To optimize memory usage, `doc2vec.py` reads the GloVe file line by line, building a dictionary incrementally.
 
 ### Web Server Implementation
 
 The Flask server should handle two primary URLs: a list of articles at `/` and individual articles at `/article/topic/filename`. The BBC corpus is organized into topic directories containing text files.
-
-Access the articles list via `IP.txt`:
-
-```
-http://127.0.0.1:5000/
-```
-
-And a specific article at:
-
-```
-http://127.0.0.1:5000/article/business/030.txt
-```
 
 The `server.py` file contains Flask route definitions:
 
