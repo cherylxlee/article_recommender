@@ -17,12 +17,19 @@ def articles():
     grouped_articles = {}
     for article in articles_sorted:
         topic = article[0]
+        title = article[2]
+
         if topic not in grouped_articles:
-            grouped_articles[topic] = []
-        grouped_articles[topic].append({
-            "filename": article[1],
-            "title": article[2]
-        })
+            grouped_articles[topic] = {}
+
+        if title not in grouped_articles[topic]:
+            grouped_articles[topic][title] = {
+                "filename": article[1],
+                "title": title
+            }
+
+    for topic in grouped_articles:
+        grouped_articles[topic] = list(grouped_articles[topic].values())
 
     return render_template("articles.html", grouped_articles=grouped_articles)
 

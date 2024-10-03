@@ -60,23 +60,13 @@ def get_text(filename):
 
 
 def words(text):
+    """    
+    Given a string, returns a list of words normalized using spaCy's tokenizer.
+    - Lowercase all words
+    - Filter out stop words and short words (< 3 characters)
     """
-    Given a string, return a list of words normalized as follows.
-    
-        1. Lowercase all words
-        2. Use re.sub function and string.punctuation + '0-9\\r\\t\\n]'
-            to replace all those char with a space character.
-        3. Split on space to get word list.
-        4. Ignore words < 3 char long.
-        5. Remove stop words using spaCy's stop words list
-    """
-    text = text.lower()
-    text = re.sub("[" + string.punctuation + '0-9\\r\\t\\n]', ' ', text)
-    word_list = text.split()
-
-    normalized_word_list = [word for word in word_list if len(word) >= 3 and word not in STOP_WORDS]
-
-    return normalized_word_list
+    doc = nlp(text.lower())
+    return [token.text for token in doc if token.is_alpha and not token.is_stop and len(token.text) >= 3]
 
 
 def split_title(text):
@@ -163,17 +153,31 @@ def recommended(article, articles, n):
     Output:
          list of [topic, filename, title]
     """
-    dist_list = distances(article, articles)
+    # Avoid self-recommendation
+    current_title = article[1]
+    seen_titles = {current_title}
 
-    # Sort by distance and exclude the first item (the article itself)
-    top_n_articles = sorted(dist_list, key=lambda x: x[0])[1:n+1]
+    other_articles = [a for a in articles if a[0] != article[0]]
 
+    dist_list = distances(article, other_articles)
+    
+    sorted_articles = sorted(dist_list, key=lambda x: x[0])
+    
     recommendations = []
-    for _, a in top_n_articles:
+    for _, a in sorted_articles:
         topic = os.path.basename(os.path.dirname(a[0]))  # Extract topic
         filename = os.path.basename(a[0])  # Extract filename
-        recommendations.append([topic, filename, a[1]])
-
+        title = a[1]
+        
+        # Only add this article if we haven't seen its title before
+        if title not in seen_titles:
+            recommendations.append([topic, filename, title])
+            seen_titles.add(title)
+        
+        # Stop if we have n recommendations
+        if len(recommendations) == n:
+            break
+    
     return recommendations
 
 
